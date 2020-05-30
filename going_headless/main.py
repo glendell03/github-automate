@@ -42,9 +42,9 @@ new_repo = '//*[@id="repos-container"]/h2/a'
 new_repo_name = '//*[@id="repository_name"]'
 create_repo = '//*[@id="new_repository"]/div[3]/button'
 
-loading("Creating Github Repository....")
-driver.find_element_by_xpath(username_input).send_keys("glendell03")
-driver.find_element_by_xpath(password_input).send_keys("glendellbringino703")
+driver.find_element_by_xpath(username_input).send_keys("YOUR USERNAME")
+driver.find_element_by_xpath(password_input).send_keys("YOUR PASSWORD")
+loading("Creating Github Repository.....")
 driver.find_element_by_xpath(login_submit).click()
 driver.find_element_by_xpath(new_repo).click()
 driver.find_element_by_xpath(new_repo_name).send_keys(repository_name)
@@ -70,7 +70,7 @@ except OSError:
     print(f"{directory} is already exist")
     quit()
 else:
-    loading("\nCreating Repository Folder....")
+    loading("\nCreating Repository Folder.....")
     print(u"\u001b[32;1\nmSuccesfully created " + directory + u"\u001b[0m")
 
 class cd:
