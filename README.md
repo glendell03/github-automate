@@ -8,5 +8,6 @@
 - driver.find_element_by_xpath(password_input).send_keys("YOUR PASSWORD")
 
 ***Run***
+- Open terminal and go to the directory
 - run python3 main.py Name-of-repository
 - ex. python3 main.py github-automate
