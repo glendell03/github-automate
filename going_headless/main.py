@@ -16,7 +16,12 @@ except:
 
 chrome_options = Options()
 chrome_options.add_argument('--headless')
+# linux 
 chrome_options.binary_location = "/usr/bin/google-chrome"
+# Mac (Uncomment if your mac user)
+#chrome_options.binary_location = "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+# Windows (Uncomment if your windows user)
+#chrome_options.binary_location = "C:\Users\%USERNAME%\AppData\Local\Google\Chrome\Application\chrome.exe"
 
 
 driver = webdriver.Chrome(executable_path=os.path.abspath('chromedriver'), chrome_options=chrome_options)
@@ -42,6 +47,7 @@ new_repo = '//*[@id="repos-container"]/h2/a'
 new_repo_name = '//*[@id="repository_name"]'
 create_repo = '//*[@id="new_repository"]/div[3]/button'
 
+# Put your username and password here 
 driver.find_element_by_xpath(username_input).send_keys("YOUR USERNAME")
 driver.find_element_by_xpath(password_input).send_keys("YOUR PASSWORD")
 loading("Creating Github Repository.....")
@@ -61,7 +67,7 @@ git_remote = driver.find_element_by_xpath('//*[@id="empty-setup-new-repo-echo"]/
 git_push = driver.find_element_by_xpath('//*[@id="empty-setup-new-repo-echo"]/span[6]').text
 driver.close()
 
-
+# Change the directory where you want to create the repository 
 directory = f"/home/glendell03/{copy}"
 cmd = f"cd {directory}"
 try:
