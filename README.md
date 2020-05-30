@@ -1,5 +1,7 @@
 # github-automate
 
+Create Repository without opening your browser
+
 - clone the repository
 - open it on your code editor
 
