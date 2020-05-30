@@ -2,6 +2,8 @@ import sys
 import time
 import os
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
 
 
 try:
@@ -12,9 +14,25 @@ except:
     quit()
 
 
-chromedriver_location = '/home/glendell03/Downloads/chromedriver'
-driver = webdriver.Chrome(chromedriver_location)
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.binary_location = "/usr/bin/google-chrome"
+
+
+driver = webdriver.Chrome(executable_path=os.path.abspath('chromedriver'), chrome_options=chrome_options)
 driver.get('https://github.com/login')
+
+
+def loading(x):
+    print(x)
+    for i in range(0,100):
+        time.sleep(0.01)
+        width = (i + 1)/2
+        width = int(width)
+        bar = "[" + u"\u001b[32;1m#\u001b[0m" * width + " " * (50 - width) + "]"
+        sys.stdout.write(u"\u001b[1000D" +  bar)
+        sys.stdout.flush()
+    print
 
 
 username_input = '//*[@id="login_field"]'
@@ -24,7 +42,7 @@ new_repo = '//*[@id="repos-container"]/h2/a'
 new_repo_name = '//*[@id="repository_name"]'
 create_repo = '//*[@id="new_repository"]/div[3]/button'
 
-
+loading("Creating Github Repository....")
 driver.find_element_by_xpath(username_input).send_keys("glendell03")
 driver.find_element_by_xpath(password_input).send_keys("glendellbringino703")
 driver.find_element_by_xpath(login_submit).click()
@@ -43,26 +61,16 @@ git_remote = driver.find_element_by_xpath('//*[@id="empty-setup-new-repo-echo"]/
 git_push = driver.find_element_by_xpath('//*[@id="empty-setup-new-repo-echo"]/span[6]').text
 driver.close()
 
-def loading():
-    print("Creating Repository Folder....")
-    for i in range(0,100):
-        time.sleep(0.01)
-        width = (i + 1)/2
-        width = int(width)
-        bar = "[" + u"\u001b[32;1m#\u001b[0m" * width + " " * (50 - width) + "]"
-        sys.stdout.write(u"\u001b[1000D" +  bar)
-        sys.stdout.flush()
-    print
-
 
 directory = f"/home/glendell03/{copy}"
+cmd = f"cd {directory}"
 try:
     os.mkdir(directory)
 except OSError:
     print(f"{directory} is already exist")
     quit()
 else:
-    loading()
+    loading("\nCreating Repository Folder....")
     print(u"\u001b[32;1\nmSuccesfully created " + directory + u"\u001b[0m")
 
 class cd:
@@ -81,6 +89,8 @@ with cd(directory):
     os.system(git_commit)
     os.system(git_remote)
     os.system(git_push)
+    os.system(cmd)
+    os.system('code .')
 
 
 
